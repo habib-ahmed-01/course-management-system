@@ -4,4 +4,4 @@ from utils.db import database_connection
 if __name__ == '__main__':
     session = database_connection('postgresql')
     user = UserManager(session)
-    user.create_user(username='Habibul Bashar Ahmed', email="laru.y2k@gmail.com", password="password123#", role="Master")
+    user.get_user('8308dc90-1897-4bd4-b4be-5a7d59350a85')

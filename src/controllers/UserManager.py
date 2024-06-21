@@ -27,6 +27,11 @@ class UserManager:
         self._session.exec(statement)
         self._session.commit()
 
+    def get_user(self, user_id):
+        statement = text(f"""SELECT * FROM users WHERE id='{user_id}'""")
+        data = self._session.exec(statement).first()
+        print(data)
+
     def delete_user(self, user_id):
         statement = text(f"""DELETE FROM users WHERE id='{user_id}'""")
         self._session.exec(statement)
