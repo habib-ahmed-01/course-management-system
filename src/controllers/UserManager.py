@@ -7,14 +7,14 @@ class UserManager:
     def __init__(self, session):
         self._session = session
 
-    def create_user(self, username: str, email: str, password: str, role: str):
+    def create_user(self, username: str, email: str, password: str, role: str) -> None:
         hashed_password = bcrypt.hash(password)
         statement: text = text(
             f"""INSERT INTO users (username, email, password, role) values ('{username}', '{email}', '{hashed_password}', '{role}')""")
         self._session.exec(statement)
         self._session.commit()
 
-    def update_user(self, user_id: str, **kwargs: str):
+    def update_user(self, user_id: str, **kwargs: str) -> None:
         update_params: list = []
         kwargs['password'] = bcrypt.hash(kwargs['password'])
         for key, value in kwargs.items():
@@ -27,15 +27,15 @@ class UserManager:
         self._session.exec(statement)
         self._session.commit()
 
-    def get_user(self, user_id):
-        statement = text(f"""SELECT * FROM users WHERE id='{user_id}'""")
+    def get_user(self, user_id: str) -> tuple:
+        statement: text = text(f"""SELECT * FROM users WHERE id='{user_id}'""")
         return self._session.exec(statement).first()
 
-    def get_all(self):
-        statement = text(f"""SELECT * FROM users;""")
+    def get_all(self) -> list:
+        statement: text = text(f"""SELECT * FROM users;""")
         return self._session.exec(statement).all()
 
-    def delete_user(self, user_id):
-        statement = text(f"""DELETE FROM users WHERE id='{user_id}'""")
+    def delete_user(self, user_id: str) -> None:
+        statement: text = text(f"""DELETE FROM users WHERE id='{user_id}'""")
         self._session.exec(statement)
         self._session.commit()
