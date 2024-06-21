@@ -1,4 +1,5 @@
-# Methods: create_user, authenticate, update_user, delete_user
+# Methods: create_user, update_user, delete_user
+from passlib.hash import bcrypt
 from sqlmodel import text
 
 
@@ -7,14 +8,15 @@ class UserManager:
         self._session = session
 
     def create_user(self, username: str, email: str, password: str, role: str):
+        hashed_password = bcrypt.hash(password)
         statement: text = text(
-            f"""INSERT INTO users (username, email, password, role) values ('{username}', '{email}', '{password}', '{role}')""")
+            f"""INSERT INTO users (username, email, password, role) values ('{username}', '{email}', '{hashed_password}', '{role}')""")
         self._session.exec(statement)
         self._session.commit()
 
     def update_user(self, user_id: str, **kwargs: str):
         update_params: list = []
-
+        kwargs['password'] = bcrypt.hash(kwargs['password'])
         for key, value in kwargs.items():
             update_string: str = f"{key}='{value}'"
             update_params.append(update_string)
