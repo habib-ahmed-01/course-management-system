@@ -1,5 +1,5 @@
 import toml
-from sqlmodel import Session, create_engine, text
+from sqlmodel import Session, create_engine
 from psycopg2 import OperationalError, DatabaseError
 
 
@@ -18,7 +18,7 @@ def database_connection(connection_name: str) -> Session:
         return Session(engine)
 
     except (FileNotFoundError, KeyError, ValueError, OperationalError, DatabaseError) as e:
-        print(f"Hahahaha: {e}")
+        print(f"ERROR: {e}")
         raise
 
 # if __name__ == '__main__':
