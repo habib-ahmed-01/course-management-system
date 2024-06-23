@@ -114,7 +114,7 @@ CourseManager.create_course(...)
 UserManager.add_user(...)
 LessonManager.create_lesson(...)
 EnrollmentManager.enroll_user(...)
-
+```
 
 ## Acknowledgements
 
