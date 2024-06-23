@@ -10,7 +10,7 @@ A Course Management System written in Python, designed to be user-friendly and e
 - **Easy Configuration**: Configure database settings through a `secrets.toml` file.
 
 ## Folder Structure
-
+```
 src/
 ├── controllers/
 │ ├── CourseManager.py
@@ -26,7 +26,7 @@ src/
 │ └── db.py
 ├── app.py
 └── secrets.toml
-
+```
 
 ## Getting Started
 
